@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="DeolaJ Github replica"
+    />
+    <link href="main.css" rel="stylesheet" />
+    <title>DeolaJ | Your Repositories</title>
+  </head>
+  <body>
+    <main>
+      <section>
+        I am here
+      </section>
+      <section class="repos">
+      </section>
+    </main>
+    <script>
+      class Repositories {
+        constructor(element, list) {
+          this.root = element;
+          this.data = list;
+        }
+
+        createList() {
+          const d = document.createDocumentFragment();
+          this.data.forEach(function (item, index) {
+            var wrapper = document.createElement("li");
+
+            var leftContent = document.createElement("div");
+            var rightContent = document.createElement("div");
+            var topContent = document.createElement("div");
+            var bottomContent = document.createElement("div");
+
+            leftContent.classList.add("left-content");
+            rightContent.classList.add("right-content");
+
+            topContent.classList.add("top-content");
+            bottomContent.classList.add("bottom-content");
+
+            var header = document.createElement("h3");
+            var headerLink = document.createElement("a");
+            var description = document.createElement("p");
+            var starButton = document.createElement("button");
+
+            // Star Button
+            starButton.textContent = "Star";
+            starButton.classList.add("start-button")
+
+            // Header
+            headerLink.textContent = item.name;
+            headerLink.href = item.url;
+            header.appendChild(headerLink);
+            topContent.appendChild(header);
+
+            // Description
+            description.textContent = item.description;
+
+            // Private Label
+            if (item.private) {
+              var privateLabel = document.createElement("label");
+              privateLabel.textContent = "private";
+
+              topContent.appendChild(privateLabel);
+            }
+
+            // Primary Language
+            if (item.primaryLanguage) {
+              var primaryLang = document.createElement("div");
+              primaryLang.classList.add('primary-language');
+
+              var primaryLangText = document.createElement("p");
+              var primaryLangTag = document.createElement("span");
+              primaryLangText.textContent = item.primaryLanguage.name;
+              primaryLangTag.classList.add(item.primaryLanguage.name.toLowerCase() + '-tag');
+
+              primaryLang.appendChild(primaryLangTag);
+              primaryLang.appendChild(primaryLangText);
+
+              bottomContent.appendChild(primaryLang);
+            }
+
+            // Stargazers count
+            if (item.stargazerCount) {
+              var stargazer = document.createElement("div");
+              stargazer.classList.add('stargazer-count');
+
+              var stargazerText = document.createElement("p");
+              var stargazerImage = document.createElement("img");
+              stargazerText.textContent = item.stargazerCount;
+              stargazerImage.src = 'imageLink';
+
+              stargazer.appendChild(stargazerImage);
+              stargazer.appendChild(stargazerText);
+
+              bottomContent.appendChild(stargazer);
+            }
+
+            // Fork Count
+            if (item.forkCount) {
+              var forkCount = document.createElement("div");
+              forkCount.classList.add('fork-count');
+
+              var forkCountText = document.createElement("p");
+              var forkCountImage = document.createElement("img");
+              forkCountText.textContent = item.forkCount;
+              forkCountImage.src = 'imageLink';
+
+              forkCount.appendChild(forkCountImage);
+              forkCount.appendChild(forkCountText);
+
+              bottomContent.appendChild(forkCount);
+            }
+
+            // License Information
+            if (item.licenseInfo) {
+              var license = document.createElement("div");
+              license.classList.add('license');
+
+              var licenseText = document.createElement("p");
+              var licenseImage = document.createElement("img");
+              licenseText.textContent = item.licenseInfo.name;
+              licenseImage.src = 'imageLink';
+
+              license.appendChild(licenseImage);
+              license.appendChild(licenseText);
+
+              bottomContent.appendChild(license);
+            }
+
+            // Last Updated Time
+            var updatedAtText = document.createElement("p");
+            updatedAtText.classList.add('updated-time');
+
+            var currentDate = Date.now();
+            var updatedDate = new Date(item.updatedAt);
+            var days = (currentDate - updatedDate.getTime()) / (1000 * 24 * 3600);
+
+            if (days < 1) {
+              var hours = days * 24;
+
+              if (hours < 1) {
+                var minutes = Math.ceil(hours * 60);
+                updatedAtText.textContent = 'Updated ' + minutes + ' minutes ago';
+              } else {
+                updatedAtText.textContent = 'Updated ' + Math.ceil(hours) + ' hours ago';
+              }
+            }
+            if ((days > 1) && (days < 30)) {
+              updatedAtText.textContent = 'Updated ' + Math.ceil(days) + ' days ago';
+            }
+            if ((days > 30) && (days < 365)) {
+              var updatedDateArray = String(updatedDate).split(' ');
+              var day = updatedDateArray[2] + ' ' + updatedDateArray[1];
+              updatedAtText.textContent = 'Updated on ' + day;
+            }
+            if (days > 365) {
+              var updatedDateArray = String(updatedDate).split(' ');
+              var day = updatedDateArray[2] + ' ' + updatedDateArray[1] + ' ' + updatedDateArray[3];
+              updatedAtText.textContent = 'Updated on ' + day;
+            }
+            bottomContent.appendChild(updatedAtText);
+
+            // Append all in order
+            leftContent.appendChild(topContent)
+            leftContent.appendChild(description)
+            leftContent.appendChild(bottomContent)
+            rightContent.appendChild(starButton);
+
+            wrapper.appendChild(leftContent);
+            wrapper.appendChild(rightContent);
+
+            d.appendChild(wrapper);
+          });
+
+          this.root.appendChild(d);
+        }
+      };
+
+      var query = `query {
+        viewer {
+          repositories(first: 100, orderBy: { field: UPDATED_AT, direction: DESC }) {
+            totalCount
+            nodes {
+              name
+              url
+              description
+              updatedAt
+              isFork
+              stargazerCount
+              isPrivate
+              licenseInfo {
+                name
+              }
+              forkCount
+              primaryLanguage {
+                name
+              }
+            }
+          }
+        }
+      }`;
+
+      function fetchUserRepositories () {
+        return fetch('https://api.github.com/graphql', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ',
+          },
+          body: JSON.stringify({
+            query,
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('data returned:', data);
+          const repoWrapper = document.querySelector('.repos');
+          var repositories = new Repositories(repoWrapper, data.data.viewer.repositories.nodes);
+          repositories.createList();
+        });
+      }
+
+      fetchUserRepositories();
+    </script>
+  </body>
+</html>

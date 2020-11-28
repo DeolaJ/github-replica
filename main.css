@@ -747,3 +747,64 @@ h3 a {
   background-color: #f3f4f6;
   border-color: rgba(27, 31, 35, 0.15);
 }
+
+
+/* Footer Section */
+footer {
+  padding: 0 1rem;
+}
+
+.footer-wrapper {
+  margin-top: 6rem;
+  border-top: 1px solid #eaecef;
+  padding: 2.5rem 0 3rem;
+}
+
+footer li {
+  color: rgb(88, 96, 105);
+  font-size: .75rem;
+}
+
+footer li a {
+  color: #0366d6;
+  font-size: .75rem;
+}
+
+footer li a:hover {
+  text-decoration: underline;
+}
+
+.footer-logo svg {
+  fill: rgb(209, 213, 218);
+  height: 24px;
+}
+
+.footer-logo a:hover svg {
+  fill: rgb(106, 115, 125);
+}
+
+@media (max-width: 768px) {
+
+  footer li + li {
+    margin-left: 1rem;
+  }
+
+  footer .row {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .footer-logo {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .footer-logo a {
+    display: block;
+  }
+
+  footer .row {
+    justify-content: space-between;
+  }
+}

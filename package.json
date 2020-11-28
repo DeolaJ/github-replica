@@ -1,0 +1,12 @@
+{
+  "name": "github-replica",
+  "version": "1.0.0",
+  "description": "A replica of my Github repository tab",
+  "main": "index.js",
+  "author": "Adeola Adeyemo <adeola.adeyemoj@yahoo.com>",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --public-url ./"
+  },
+  "license": "MIT"
+}

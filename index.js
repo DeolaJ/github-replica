@@ -1,3 +1,4 @@
+const Stickyfill = require('./stickyfill.min.js');
 
 var licenseSVG = `
   <svg aria-label="license" viewBox="0 0 16 16" version="1.1" width="16" height="16" role="img">
@@ -316,8 +317,14 @@ function updateSubnavAvatar() {
     avatar.classList.remove("hide-content")
     avatar.classList.add("show-content")
   }
+};
+
+function setSticky () {
+  // Polyfill for position sticky
+  const stickyElements = document.querySelectorAll(".subnav-wrapper");
+  Stickyfill.add(stickyElements);
 }
 
 fetchUserRepositories();
-
+setSticky();
 window.addEventListener("scroll", updateSubnavAvatar)

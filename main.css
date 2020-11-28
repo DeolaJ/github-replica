@@ -476,6 +476,11 @@ header a:hover {
   margin: 0 -16px;
 }
 
+.subnav-wrapper.mobile-subnav {
+  overflow-y: auto;
+  top: -1px;
+}
+
 .subnav > button {
   padding: .5rem 1rem;
   font-size: .875rem;

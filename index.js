@@ -275,9 +275,10 @@ function fetchUserRepositories () {
       query,
     })
   })
-  .then(response => response.json())
-  .then(data => {
-    console.log('data returned:', data);
+  .then(function (response) {
+    return response.json()
+  })
+  .then(function (data) {
     const loadingWrapper = document.querySelector('.loading-wrapper');
     const pageWrapper = document.querySelector('.page-content');
     const repoWrapper = document.querySelector('.repos');

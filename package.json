@@ -24,7 +24,7 @@
     "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-html": "^6.1.2",
     "eslint-plugin-prettier": "^3.4.0",
-    "postcss": "^8.2.12",
+    "postcss": "^8.2.7",
     "prettier": "^2.2.1"
   },
   "postcss": {

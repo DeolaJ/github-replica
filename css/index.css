@@ -1,9 +1,6 @@
 /* Globals */
 :root {
-  /* Font size */
   --text-sm: 0.875rem;
-
-  /* Colors */
   --blue: #0366d6;
   --grey-blue: #282858;
   --grey-dark: #24292e;
@@ -557,7 +554,7 @@ header a:hover {
 }
 
 .avatar-container__avatar img {
-  border-radius: 50% !important;
+  border-radius: 50%;
   display: inline-block;
   overflow: hidden;
   width: 100%;
@@ -650,7 +647,7 @@ header a:hover {
   background-color: white;
   top: 0;
   z-index: 4;
-  margin: 0 -16px;
+  margin: 0 -1rem;
 }
 
 .subnav-wrapper.mobile-subnav {
@@ -910,26 +907,6 @@ header a:hover {
   display: inline-block;
   width: 0.75rem;
   height: 0.75rem;
-}
-
-.html-tag {
-  background-color: #e34c26;
-}
-
-.javascript-tag {
-  background-color: #f1e05a;
-}
-
-.typescript-tag {
-  background-color: #2b7489;
-}
-
-.shell-tag {
-  background-color: #89e051;
-}
-
-.css-tag {
-  background-color: #563d7c;
 }
 
 @media (min-width: 1012px) {

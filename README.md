@@ -3,6 +3,10 @@
 Using the [Github GraphQL](https://developer.github.com/v4/explorer/) API.
 The project is live [here](https://deolaj-github-repo.netlify.app/)
 
+## Description
+
+Generate the Github Repository tab for any user with only their username
+
 ## Instructions
 
 The entry files:

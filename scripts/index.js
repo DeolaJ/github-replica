@@ -29,7 +29,6 @@ getElement('.login-generator__button').addEventListener('click', async function 
 
     const userInfo = response.user;
     const userRepos = userInfo.repositories.nodes;
-    console.log({ userInfo });
 
     // Update DOM with user information
     updateUserInfo(userInfo);

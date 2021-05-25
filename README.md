@@ -42,7 +42,7 @@ To generate build files for production,
 ### Test
 
 Tests were written using Cypress. Test files are in `cypress/integration/`.
-To run tests
+To run tests, ensure your development server is running and run
 
     yarn test
 

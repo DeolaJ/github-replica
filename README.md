@@ -15,7 +15,9 @@ The entry files:
 - CSS: `css/index.css`
 - JS: `scripts/index.js`
 
-Parcel was used as the bundler for this project
+Parcel was used as the bundler for this project.
+
+To add your GITHUB_TOKEN, create an `.env` file using the `.sampleenv` file (as a sample) and input your personal token.
 
 ### Getting Started
 
